@@ -9,14 +9,12 @@ final class Events
 {
     /**
      * Sent whenever a Add stock command is given.
-     * The handler receives a {@link CheckoutEndEvent} instance.
      * @var string
      */
     const ADD_PRODUCT_STOCK = 'app.product_stock.add';
 
     /**
      * Sent whenever a Remove stock command is given.
-     * The handler receives a {@link CheckoutEndEvent} instance.
      * @var string
      */
     const REMOVE_PRODUCT_STOCK = 'app.product_stock.remove';

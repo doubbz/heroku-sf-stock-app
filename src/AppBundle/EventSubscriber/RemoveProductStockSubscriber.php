@@ -11,6 +11,10 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
+/**
+ * Subscriber for removeProductStockEvent
+ * updates stock of the product
+ */
 class RemoveProductStockSubscriber implements EventSubscriberInterface
 {
     /** @var  EntityManagerInterface */
@@ -32,11 +36,17 @@ class RemoveProductStockSubscriber implements EventSubscriberInterface
         $this->productRepository = $em->getRepository(Product::class);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public static function getSubscribedEvents()
     {
         return [Events::REMOVE_PRODUCT_STOCK => 'onRemoveProductStock'];
     }
 
+    /**
+     * @param RemoveProductStockEvent $event
+     */
     public function onRemoveProductStock(RemoveProductStockEvent $event)
     {
         /** @var Product $product */

@@ -9,6 +9,10 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
+/**
+ * Subscriber for addProductStockEVent
+ * updates stock of the product
+ */
 class AddProductStockSubscriber implements EventSubscriberInterface
 {
     /** @var  EntityManagerInterface */
@@ -26,11 +30,17 @@ class AddProductStockSubscriber implements EventSubscriberInterface
         $this->productRepository = $em->getRepository(Product::class);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public static function getSubscribedEvents()
     {
         return [Events::ADD_PRODUCT_STOCK => 'onAddProductStock'];
     }
 
+    /**
+     * @param AddProductStockEvent $event
+     */
     public function onAddProductStock(AddProductStockEvent $event)
     {
         /** @var Product $product */
